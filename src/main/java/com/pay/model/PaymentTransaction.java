@@ -9,10 +9,13 @@ import java.math.BigDecimal;
 @Data
 public class PaymentTransaction {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
     private String orderId;
+
+    @Column(updatable = false, nullable = false, unique = true)
+    private String transactionId = java.util.UUID.randomUUID().toString();
     private BigDecimal amount;
 
     @Enumerated(EnumType.STRING)
